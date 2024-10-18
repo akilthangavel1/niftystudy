@@ -1,1 +1,346 @@
-Hello
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stock Scanner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #2e86de;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            background-color: #2e86de;
+        }
+
+        nav a {
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            background-color: #1e5fbd;
+            transition: 0.3s;
+        }
+
+        .container {
+            max-width: 100%; /* Make the container full width */
+            margin: 0 auto;
+            padding: 0 20px; /* Reduced padding for tighter layout */
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #f1f1f1;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            color: #2e86de;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .search-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .search-section input {
+            width: 300px;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-section button {
+            padding: 15px 20px;
+            background-color: #2e86de;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .search-section button:hover {
+            background-color: #1e5fbd;
+            transition: 0.3s;
+        }
+
+        .index-session {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            width: 100%; /* Ensure it takes full width */
+        }
+
+        .index-session div {
+            width: 32%; /* Keep each section equal in width */
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #2e86de;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #2e86de;
+            color: white;
+            font-size: 18px;
+        }
+
+        td {
+            font-size: 16px;
+        }
+
+        footer {
+            background-color: #2e86de;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Welcome to Stock Scanner</h1>
+        <p>Find, Analyze, and Trade with Confidence</p>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <div class="container">
+        <section class="hero">
+            <h1>Stock Market Scanning Made Simple</h1>
+            <p>Scan the market for stocks based on your criteria, identify trends, and receive alerts in real time.</p>
+        </section>
+
+        <section class="search-section">
+            <input type="text" placeholder="Enter Stock Symbol...">
+            <button>Scan Now</button>
+        </section>
+
+        <!-- First Section with Three Separate Tables -->
+        <section class="index-session">
+            <div>
+                <h2>Index List</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S&P 500</td>
+                        </tr>
+                        <tr>
+                            <td>NASDAQ</td>
+                        </tr>
+                        <tr>
+                            <td>DOW JONES</td>
+                        </tr>
+                        <tr>
+                            <td>FTSE 100</td>
+                        </tr>
+                        <tr>
+                            <td>NIFTY 50</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h2>Best Performing Index</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>S&P 500</td>
+                            <td>+1.5%</td>
+                        </tr>
+                        <tr>
+                            <td>NASDAQ</td>
+                            <td>+1.3%</td>
+                        </tr>
+                        <tr>
+                            <td>NIKKEI 225</td>
+                            <td>+1.1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h2>Worst Performing Index</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>FTSE 100</td>
+                            <td>-0.7%</td>
+                        </tr>
+                        <tr>
+                            <td>HANG SENG</td>
+                            <td>-1.0%</td>
+                        </tr>
+                        <tr>
+                            <td>ASX 200</td>
+                            <td>-0.9%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Second Section with New Three Separate Tables -->
+        <section class="index-session">
+            <div>
+                <h2>Technical View of Nifty50/Bank Nifty Index</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Technical View</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>NIFTY 50</td>
+                            <td>Bullish</td>
+                        </tr>
+                        <tr>
+                            <td>BANK NIFTY</td>
+                            <td>Neutral</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h2>Top Losers</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stock A</td>
+                            <td>-2.5%</td>
+                        </tr>
+                        <tr>
+                            <td>Stock B</td>
+                            <td>-2.1%</td>
+                        </tr>
+                        <tr>
+                            <td>Stock C</td>
+                            <td>-1.9%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h2>Top Gainers</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stock</th>
+                            <th>Change</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Stock X</td>
+                            <td>+3.1%</td>
+                        </tr>
+                        <tr>
+                            <td>Stock Y</td>
+                            <td>+2.8%</td>
+                        </tr>
+                        <tr>
+                            <td>Stock Z</td>
+                            <td>+2.5%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Stock Scanner | All Rights Reserved</p>
+    </footer>
+
+</body>
+
+</html>
