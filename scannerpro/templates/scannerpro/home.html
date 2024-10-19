@@ -150,6 +150,36 @@
             padding: 15px;
             margin-top: 50px;
         }
+        .line-button-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .horizontal-line {
+            height: 2px;
+            background-color: #333;
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .line-button {
+            padding: 10px 20px;
+            background-color: #2e86de;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        .line-button:hover {
+            background-color: #1e5fbd;
+        }
+
+        
     </style>
 </head>
 
@@ -173,7 +203,18 @@
             <h1>Stock Market Scanning Made Simple</h1>
             <p>Scan the market for stocks based on your criteria, identify trends, and receive alerts in real time.</p>
         </section>
-
+        <!-- <div class="line-button-container">
+            <div class="horizontal-line"></div>
+            <button class="line-button">Click Me</button>
+        </div>
+        <div class="line-button-container">
+            <div class="horizontal-line"></div>
+            <button class="line-button">Click Me</button>
+        </div>
+        <div class="line-button-container">
+            <div class="horizontal-line"></div>
+            <button class="line-button">Click Me</button>
+        </div> -->
         <section class="search-section">
             <input type="text" placeholder="Enter Stock Symbol...">
             <button>Scan Now</button>
@@ -342,5 +383,18 @@
     </footer>
 
 </body>
+<script>
+    const eventSource = new EventSource('/sse_event/');
+
+    
+    eventSource.onmessage = function(event) {
+        console.log("Received data:", event.data);
+        // You can update the DOM here to display the ticker data
+    };
+
+    eventSource.onerror = function(error) {
+        console.error("Error in SSE:", error);
+    };
+</script>
 
 </html>
