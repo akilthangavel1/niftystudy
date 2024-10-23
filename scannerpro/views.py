@@ -1,9 +1,14 @@
 from django.shortcuts import render
 import time
 from django.http import StreamingHttpResponse
-
+from scannerpro.tasks import process_stock_data
 
 def scanner_home(request):
+    return render(request, "scannerpro/home.html", {})
+
+def scanner_test(request):
+    print("#"*30)
+    process_stock_data.delay("{'ltp': 5935.0, 'symbol': 'MCX:CRUDEOILM24NOVFUT', 'type': 'sf'}")
     return render(request, "scannerpro/home.html", {})
 
 
