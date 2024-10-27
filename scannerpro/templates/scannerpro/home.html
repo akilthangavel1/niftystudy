@@ -46,9 +46,9 @@
         }
 
         .container {
-            max-width: 100%; /* Make the container full width */
+            max-width: 100%;
             margin: 0 auto;
-            padding: 0 20px; /* Reduced padding for tighter layout */
+            padding: 0 20px;
         }
 
         .hero {
@@ -104,11 +104,11 @@
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
-            width: 100%; /* Ensure it takes full width */
+            width: 100%;
         }
 
         .index-session div {
-            width: 32%; /* Keep each section equal in width */
+            width: 32%;
             padding: 20px;
             background-color: #fff;
             border: 1px solid #ccc;
@@ -127,7 +127,9 @@
             border-collapse: collapse;
         }
 
-        table, th, td {
+        table,
+        th,
+        td {
             border: 1px solid #ddd;
             text-align: center;
             padding: 10px;
@@ -150,36 +152,60 @@
             padding: 15px;
             margin-top: 50px;
         }
-        .line-button-container {
+
+        .dropdown-container {
             display: flex;
+            justify-content: flex-start;
             align-items: center;
-            justify-content: space-between;
-            width: 100%;
-            margin-top: 20px;
+            margin: 10px 0;
         }
 
-        .horizontal-line {
-            height: 2px;
-            background-color: #333;
-            flex-grow: 1;
+        .dropdown-container label {
+            font-size: 16px;
             margin-right: 10px;
         }
 
-        .line-button {
-            padding: 10px 20px;
+        .dropdown-container select {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+            outline: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0iIzMzMyI+PHBvbHlnb24gcG9pbnRzPSI1MCA3MCAyMCAzMCA4MCAzMCI+PC9wb2x5Z29uPjwvc3ZnPg==');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+            margin-right: 10px;
+            /* Add space between select and button */
+        }
+
+        .dropdown-container select:hover {
+            border-color: #2e86de;
+        }
+
+        .dropdown-container select:focus {
+            border-color: #2e86de;
+            box-shadow: 0 0 5px rgba(46, 134, 222, 0.5);
+        }
+
+        #go-button {
+            padding: 12px 20px;
+            font-size: 16px;
             background-color: #2e86de;
             color: white;
             border: none;
-            cursor: pointer;
             border-radius: 4px;
-            transition: background-color 0.3s;
+            cursor: pointer;
+            outline: none;
         }
 
-        .line-button:hover {
+        #go-button:hover {
             background-color: #1e5fbd;
+            transition: 0.3s;
         }
-
-        
     </style>
 </head>
 
@@ -203,49 +229,108 @@
             <h1>Stock Market Scanning Made Simple</h1>
             <p>Scan the market for stocks based on your criteria, identify trends, and receive alerts in real time.</p>
         </section>
-        <!-- <div class="line-button-container">
-            <div class="horizontal-line"></div>
-            <button class="line-button">Click Me</button>
-        </div>
-        <div class="line-button-container">
-            <div class="horizontal-line"></div>
-            <button class="line-button">Click Me</button>
-        </div>
-        <div class="line-button-container">
-            <div class="horizontal-line"></div>
-            <button class="line-button">Click Me</button>
-        </div> -->
         <section class="search-section">
             <input type="text" placeholder="Enter Stock Symbol...">
             <button>Scan Now</button>
         </section>
 
-        <!-- First Section with Three Separate Tables -->
+
         <section class="index-session">
             <div>
-                <h2>Index List</h2>
+                <h2>Study Nifty Scanner</h2>
+                <div class="dropdown-container">
+                    <label for="timeframe">Choose a timeframe:</label>
+                    <select name="timeframe" id="timeframe">
+                        <option value="1min">1 Minute</option>
+                        <option value="5min">5 Minutes</option>
+                        <option value="15min">15 Minutes</option>
+                        <option value="1h">1 Hour</option>
+                        <option value="1d">1 Day</option>
+                        <option value="1w">1 Week</option>
+                        <option value="1m">1 Month</option>
+                    </select>
+                    <button id="go-button">Go</button>
+                </div>
+
+
+
+                <table id="nifty-scanner-table"> <!-- Added ID here -->
+                    <thead>
+                        <tr>
+                            <th scope="col">Datetime</th>
+                            <th scope="col">Stocks</th>
+                            <th scope="col">Signal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Rows will be added here dynamically -->
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h2>Best Performed Signals</h2>
                 <table>
                     <thead>
                         <tr>
-                            <th>Index</th>
+                            <th>Stocks</th>
+                            <th>Performance</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr>
-                            <td>S&P 500</td>
+                            <td>SBIN</td>
+                            <td>+1.5%</td>
                         </tr>
                         <tr>
-                            <td>NASDAQ</td>
+                            <td>ITC</td>
+                            <td>+1.3%</td>
                         </tr>
                         <tr>
-                            <td>DOW JONES</td>
+                            <td>TECHM</td>
+                            <td>+1.1%</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <h2>Worst Performed Stocks</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Stocks</th>
+                            <th>Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>BAJFINANCE</td>
+                            <td>-0.7%</td>
                         </tr>
                         <tr>
-                            <td>FTSE 100</td>
+                            <td>BAJAJ-AUTO</td>
+                            <td>-1.0%</td>
                         </tr>
                         <tr>
-                            <td>NIFTY 50</td>
+                            <td>SHRIRAMFIN</td>
+                            <td>-0.9%</td>
                         </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+        <section class="index-session">
+            <div>
+                <h2>Index List</h2>
+                <table id="index-list-table"> 
+                    <thead>
+                        <tr>
+                            <th>Index</th>
+                            <th>Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        
+                       
                     </tbody>
                 </table>
             </div>
@@ -300,8 +385,6 @@
                 </table>
             </div>
         </section>
-
-        <!-- Second Section with New Three Separate Tables -->
         <section class="index-session">
             <div>
                 <h2>Technical View of Nifty50/Bank Nifty Index</h2>
@@ -384,17 +467,115 @@
 
 </body>
 <script>
-    const eventSource = new EventSource('/sse_event/');
+    // SSE Connection for Index Data
+    const indexEventSource = new EventSource('/sse-index/');
+    const indexListTableBody = document.querySelector("#index-list-table tbody");
 
-    
-    eventSource.onmessage = function(event) {
-        console.log("Received data:", event.data);
-        // You can update the DOM here to display the ticker data
-    };
+    indexEventSource.onmessage = function(event) {
+        const data = JSON.parse(event.data);
+        console.log("Index Data: ", data);
 
-    eventSource.onerror = function(error) {
-        console.error("Error in SSE:", error);
+        // Check if the data is not empty
+        if (!Array.isArray(data) || data.length === 0) {
+            console.warn("Received empty index data or invalid format.");
+            return;
+        }
+
+        // Clear existing rows in the index list table body
+        indexListTableBody.innerHTML = "";
+
+        // Iterate over each index data object
+        data.forEach(indexData => {
+            // Create a new row
+            const newRow = document.createElement('tr');
+
+            // Create cells for Index Name and Percentage Change
+            const indexNameCell = document.createElement('td');
+            const percentageChangeCell = document.createElement('td');
+
+            // Set the cell content
+            indexNameCell.textContent = indexData['Index Name']; // Accessing index name
+            percentageChangeCell.textContent = (indexData['Percentage Change']) + ' %'; // Formatting percentage
+
+            // Append the cells to the row
+            newRow.appendChild(indexNameCell);
+            newRow.appendChild(percentageChangeCell);
+
+            // Append the row to the index list table body
+            indexListTableBody.appendChild(newRow);
+        });
     };
 </script>
+
+
+<script>
+    // Fetch the table body using its table ID
+    const niftyTableBody = document.querySelector("#nifty-scanner-table tbody");
+
+    // SSE Connection for real-time stock signal updates
+    const stockSignalEventSource = new EventSource('{% url "sse_event" %}'); // Renamed variable
+
+    stockSignalEventSource.onopen = function () {
+        console.log("Connection to server opened.");
+    };
+
+    stockSignalEventSource.onerror = function (event) {
+        console.error("Error occurred:", event);
+    };
+
+    stockSignalEventSource.onmessage = function (event) {
+        console.log("Raw data received:", event.data); // Log the raw data
+
+        // Check if the data is not empty
+        if (event.data.trim() === "") {
+            console.warn("Received empty data.");
+            return;
+        }
+
+        try {
+            // Parse the JSON data
+            const stockDataArray = JSON.parse(event.data);
+
+            // Ensure stockDataArray is an array
+            if (!Array.isArray(stockDataArray)) {
+                console.error("Expected an array, but received:", stockDataArray);
+                return;
+            }
+
+            // Clear existing rows in the table body
+            niftyTableBody.innerHTML = "";
+
+            // Iterate over each stock data object
+            stockDataArray.forEach(stockData => {
+                // Check if we have the required data
+                if (stockData.datetime && stockData.Signal) {
+                    // Create a new row and cells
+                    const newRow = document.createElement('tr');
+                    const dateCell = document.createElement('td');
+                    const stockCell = document.createElement('td');
+                    const signalCell = document.createElement('td');
+
+                    // Set the cell content
+                    dateCell.textContent = stockData.datetime;
+                    stockCell.textContent = stockData.ticker.split(":")[1]; // Extract stock code
+                    signalCell.textContent = stockData.Signal === 1 ? "BUY" : "SELL"; // Convert signal to readable format
+
+                    // Append cells to the row
+                    newRow.appendChild(dateCell);
+                    newRow.appendChild(stockCell);
+                    newRow.appendChild(signalCell);
+
+                    // Append the row to the table body
+                    niftyTableBody.appendChild(newRow);
+                } else {
+                    console.error("Unexpected stock data format:", stockData);
+                }
+            });
+        } catch (error) {
+            console.error("Error parsing JSON data:", error);
+        }
+    };
+</script>
+
 
 </html>

@@ -1,4 +1,6 @@
 from django.db import models, connection
+import re
+from django.core.exceptions import ValidationError
 
 class TickerBase(models.Model):
     # Constants for market cap choices
@@ -73,14 +75,19 @@ class TickerBase(models.Model):
         return f"{self.ticker_symbol} ({self.ticker_sector}) - {self.ticker_market_cap}"
 
     def save(self, *args, **kwargs):
+        # Validate ticker symbol for table names
+        if not re.match(r'^[a-zA-Z0-9_]+$', self.ticker_symbol):
+            raise ValidationError("Ticker symbol contains invalid characters.")
+
         # Call the original save method to insert the TickerBase record
         super().save(*args, **kwargs)
-        
-        # Get the table name (using ticker_name or ticker_symbol)
+
+        # Get the table name using ticker_symbol in lowercase
         table_name = self.ticker_symbol.lower()
-        
-        # Create SQL query to create the new table dynamically
-        create_table_query = f"""
+        wc_table_name = f"{table_name}_wc"
+
+        # SQL query to create the main table
+        create_main_table_query = f"""
         CREATE TABLE IF NOT EXISTS "{table_name}" (
             id SERIAL PRIMARY KEY,
             date DATE NOT NULL,
@@ -91,18 +98,17 @@ class TickerBase(models.Model):
             volume BIGINT
         )
         """
-        
-        # Execute the query to create the table
+
+        # SQL query to create the WebSocket data table
+        create_wc_table_query = f"""
+        CREATE TABLE IF NOT EXISTS "{wc_table_name}" (
+            id SERIAL PRIMARY KEY,
+            timestamp TIMESTAMPTZ NOT NULL,
+            ltp FLOAT NOT NULL
+        )
+        """
+
+        # Execute the queries to create both tables
         with connection.cursor() as cursor:
-            cursor.execute(create_table_query)
-
-
-from django.db import models
-
-class StockData(models.Model):
-    symbol = models.CharField(max_length=100)
-    ltp = models.DecimalField(max_digits=10, decimal_places=2)
-    timestamp = models.DateTimeField(auto_now_add=True)
-
-    def __str__(self):
-        return f"{self.symbol} - {self.ltp} at {self.timestamp}"
+            cursor.execute(create_main_table_query)
+            cursor.execute(create_wc_table_query)
