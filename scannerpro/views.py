@@ -107,7 +107,7 @@ def generate_event_stream():
             yield f"data: Exception occurred: {str(e)}\n\n"
         
         # Sleep for a while before the next iteration
-        time.sleep(200)
+        time.sleep(60)
 
 
 def sse_event_view(request):
