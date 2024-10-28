@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Stock Scanner</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background-color: #2e86de;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        nav {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            background-color: #2e86de;
+        }
+
+        nav a {
+            color: white;
+            padding: 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            background-color: #1e5fbd;
+            transition: 0.3s;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background-color: #f1f1f1;
+        }
+
+        .hero h1 {
+            font-size: 36px;
+            color: #2e86de;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .search-section {
+            margin-top: 50px;
+            text-align: center;
+        }
+
+        .search-section input {
+            width: 300px;
+            padding: 15px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .search-section button {
+            padding: 15px 20px;
+            background-color: #2e86de;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 4px;
+            margin-left: 10px;
+        }
+
+        .search-section button:hover {
+            background-color: #1e5fbd;
+            transition: 0.3s;
+        }
+
+        .index-session {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .index-session div {
+            width: 32%;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        h2 {
+            font-size: 24px;
+            color: #2e86de;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ddd;
+            text-align: center;
+            padding: 10px;
+        }
+
+        th {
+            background-color: #2e86de;
+            color: white;
+            font-size: 18px;
+        }
+
+        td {
+            font-size: 16px;
+        }
+
+        footer {
+            background-color: #2e86de;
+            color: white;
+            text-align: center;
+            padding: 15px;
+            margin-top: 50px;
+        }
+
+        .dropdown-container {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 10px 0;
+        }
+
+        .dropdown-container label {
+            font-size: 16px;
+            margin-right: 10px;
+        }
+
+        .dropdown-container select {
+            padding: 12px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: #fff;
+            color: #333;
+            outline: none;
+            appearance: none;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTAwIDEwMCIgd2lkdGg9IjEwIiBoZWlnaHQ9IjUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0iIzMzMyI+PHBvbHlnb24gcG9pbnRzPSI1MCA3MCAyMCAzMCA4MCAzMCI+PC9wb2x5Z29uPjwvc3ZnPg==');
+            background-repeat: no-repeat;
+            background-position: right 10px center;
+            background-size: 12px;
+            margin-right: 10px;
+            /* Add space between select and button */
+        }
+
+        .dropdown-container select:hover {
+            border-color: #2e86de;
+        }
+
+        .dropdown-container select:focus {
+            border-color: #2e86de;
+            box-shadow: 0 0 5px rgba(46, 134, 222, 0.5);
+        }
+
+        #go-button {
+            padding: 12px 20px;
+            font-size: 16px;
+            background-color: #2e86de;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            outline: none;
+        }
+
+        #go-button:hover {
+            background-color: #1e5fbd;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Welcome to Stock Scanner</h1>
+        <p>Find, Analyze, and Trade with Confidence</p>
+    </header>
+
+    <nav>
+        <a href="{% url 'scanner_home' %}">Home</a>
+        <a href="#">About</a>
+        <a href="#">Features</a>
+        <a href="#">Pricing</a>
+        <a href="#">Contact</a>
+    </nav>
+    {% block content %}
+    
+    {% endblock %}
+    <footer>
+        <p>&copy; 2024 Stock Scanner | All Rights Reserved</p>
+    </footer>
+
+</body>
+
+
+</html>

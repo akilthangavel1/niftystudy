@@ -1,0 +1,105 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container ticker-list">
+    <h2>Ticker List</h2>
+    <a href="{% url 'ticker-create' %}" class="create-button">Create New Ticker</a>
+    <table class="ticker-table">
+        <thead>
+            <tr>
+                <th>Ticker Name</th>
+                <th>Ticker Symbol</th>
+                <th>Sector</th>
+                <th>Market Cap</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ticker in tickers %}
+                <tr>
+                    <td>{{ ticker.ticker_name }}</td>
+                    <td>{{ ticker.ticker_symbol }}</td>
+                    <td>{{ ticker.ticker_sector }}</td>
+                    <td>{{ ticker.ticker_market_cap }}</td>
+                    <td>
+                        <a href="{% url 'ticker-detail' ticker.pk %}" class="action-button">View</a>
+                        <a href="{% url 'ticker-update' ticker.pk %}" class="action-button">Edit</a>
+                        <a href="{% url 'ticker-delete' ticker.pk %}" class="action-button delete-button">Delete</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    /* Container styles */
+    .ticker-list {
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        margin-top: 30px;
+    }
+
+    /* Table styling */
+    .ticker-table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+    }
+
+    .ticker-table th, .ticker-table td {
+        padding: 15px;
+        text-align: center;
+        border: 1px solid #ddd;
+    }
+
+    .ticker-table th {
+        background-color: #2e86de;
+        color: white;
+        font-size: 18px;
+    }
+
+    .ticker-table td {
+        font-size: 16px;
+    }
+
+    /* Button styling */
+    .create-button {
+        display: inline-block;
+        margin-bottom: 15px;
+        padding: 10px 20px;
+        background-color: #2e86de;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .create-button:hover {
+        background-color: #1e5fbd;
+    }
+
+    .action-button {
+        padding: 8px 15px;
+        background-color: #2e86de;
+        color: white;
+        text-decoration: none;
+        border-radius: 4px;
+        margin-right: 5px;
+        transition: background-color 0.3s;
+    }
+
+    .action-button:hover {
+        background-color: #1e5fbd;
+    }
+
+    .delete-button {
+        background-color: #d9534f;
+    }
+
+    .delete-button:hover {
+        background-color: #c9302c;
+    }
+</style>
+{% endblock %}

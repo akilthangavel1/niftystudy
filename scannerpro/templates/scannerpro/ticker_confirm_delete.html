@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container">
+    <h2>Confirm Deletion</h2>
+    <p>Are you sure you want to delete "{{ ticker.ticker_name }}"?</p>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" id="go-button">Delete</button>
+    </form>
+    <a href="{% url 'ticker-list' %}">Cancel</a>
+</div>
+{% endblock %}

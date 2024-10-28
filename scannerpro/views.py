@@ -9,7 +9,7 @@ import pandas as pd
 client_id = "MMKQTWNJH3-100"
 secret_key = "EUT312TGNM"
 redirect_url = "http://localhost:4004/"
-access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGkuZnllcnMuaW4iLCJpYXQiOjE3MzAwMzUzMDAsImV4cCI6MTczMDA3NTQ0MCwibmJmIjoxNzMwMDM1MzAwLCJhdWQiOlsieDowIiwieDoxIiwieDoyIiwiZDoxIiwiZDoyIiwieDoxIiwieDowIl0sInN1YiI6ImFjY2Vzc190b2tlbiIsImF0X2hhc2giOiJnQUFBQUFCbkhqNWtlMklYVDl0cGRaRTNITnAxVGp2OFdHMHRJQUdXU2ppdWlRZzVLMkdwRHNuWE42eWhlYWVfb2JBakhEb2Rwa09Dd2UwZFBDSWNmOUxlZWJ1cGFvMWNyTWtSbVhlczM5VFZVM2thVVUxcDJhdz0iLCJkaXNwbGF5X25hbWUiOiJBS0lMIFRIQU5HQVZFTCIsIm9tcyI6IksxIiwiaHNtX2tleSI6ImJlY2M0NDU4NmZjN2MyOTFhMWZjYTAwZmVjMjA2YmQ0MjNiOThlZDRiYWY4Mjc3YjZhMWI5Y2U2IiwiZnlfaWQiOiJZQTI5Mzk2IiwiYXBwVHlwZSI6MTAwLCJwb2FfZmxhZyI6Ik4ifQ.ZcXB7HLhPrsR_14GgQtD1HEnCQjQV1LnvdSrcsBmJIY'
+access_token = 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJhcGkuZnllcnMuaW4iLCJpYXQiOjE3MzAwODQ3NDUsImV4cCI6MTczMDE2MTg0NSwibmJmIjoxNzMwMDg0NzQ1LCJhdWQiOlsieDowIiwieDoxIiwieDoyIiwiZDoxIiwiZDoyIiwieDoxIiwieDowIl0sInN1YiI6ImFjY2Vzc190b2tlbiIsImF0X2hhc2giOiJnQUFBQUFCbkh2LUpxS1pfY0VNSGh6Tm1jWWNhSTZEQXJlcGJZX01faTVOVDB3Q2VsbC15UGMwNGZHdFh3cWo4UE9PbzA4V0FCMVpGS3A4NmRqSFpYNGdZaFFSdGFsbFV0MEpZaHVMa3l0VTZxa2Rzekx2d0RBMD0iLCJkaXNwbGF5X25hbWUiOiJBS0lMIFRIQU5HQVZFTCIsIm9tcyI6IksxIiwiaHNtX2tleSI6ImJlY2M0NDU4NmZjN2MyOTFhMWZjYTAwZmVjMjA2YmQ0MjNiOThlZDRiYWY4Mjc3YjZhMWI5Y2U2IiwiZnlfaWQiOiJZQTI5Mzk2IiwiYXBwVHlwZSI6MTAwLCJwb2FfZmxhZyI6Ik4ifQ.mfP5xVfpKr7I1d649Ej0pfokE6HDShhDkWsM6uxWf1o'
 
 
 def scanner_home(request):
@@ -232,3 +232,50 @@ def index_sse_event_view(request):
     response = StreamingHttpResponse(generate_index_event_stream(), content_type='text/event-stream')
     response['Cache-Control'] = 'no-cache'
     return response
+
+# views.py
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import TickerBase
+from .forms import TickerForm  # Importing a form for handling the TickerBase model
+from django.http import HttpResponse
+
+
+def ticker_list(request):
+    tickers = TickerBase.objects.all()
+    return render(request, 'scannerpro/ticker_list.html', {'tickers': tickers})
+
+
+def ticker_detail(request, pk):
+    ticker = get_object_or_404(TickerBase, pk=pk)
+    return render(request, 'scannerpro/ticker_detail.html', {'ticker': ticker})
+
+
+def ticker_create(request):
+    if request.method == 'POST':
+        form = TickerForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('ticker-list')
+    else:
+        form = TickerForm()
+    return render(request, 'scannerpro/ticker_form.html', {'form': form})
+
+
+def ticker_update(request, pk):
+    ticker = get_object_or_404(TickerBase, pk=pk)
+    if request.method == 'POST':
+        form = TickerForm(request.POST, instance=ticker)
+        if form.is_valid():
+            form.save()
+            return redirect('ticker-list')
+    else:
+        form = TickerForm(instance=ticker)
+    return render(request, 'scannerpro/ticker_form.html', {'form': form})
+
+
+def ticker_delete(request, pk):
+    ticker = get_object_or_404(TickerBase, pk=pk)
+    if request.method == 'POST':
+        ticker.delete()
+        return redirect('ticker-list')
+    return render(request, 'scannerpro/ticker_confirm_delete.html', {'ticker': ticker})

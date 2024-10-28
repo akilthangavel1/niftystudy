@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-header bg-primary text-white">
+            <h3>{{ ticker.ticker_name }}</h3>
+        </div>
+        <div class="card-body">
+            <p><strong>Symbol:</strong> {{ ticker.ticker_symbol }}</p>
+            <p><strong>Sector:</strong> {{ ticker.ticker_sector }}</p>
+            <p><strong>Market Cap:</strong> {{ ticker.ticker_market_cap }}</p>
+            <p><strong>Sub-Sector:</strong> {{ ticker.ticker_sub_sector|default:"N/A" }}</p>
+            <a href="{% url 'ticker-update' ticker.pk %}" class="btn btn-warning">Edit</a>
+            <a href="{% url 'ticker-list' %}" class="btn btn-secondary">Back to List</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

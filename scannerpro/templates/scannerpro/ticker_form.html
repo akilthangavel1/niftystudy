@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container ticker-form">
+    <h2>Create Ticker</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}  <!-- Automatically renders the form fields with proper labels and errors -->
+        <button type="submit" class="submit-button">Submit Ticker</button>
+    </form>
+</div>
+
+<style>
+    /* (Include the CSS styles as provided earlier) */
+    .ticker-form {
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        margin-top: 30px;
+    }
+
+    h2 {
+        text-align: center;
+        color: #2e86de;
+        margin-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    label {
+        display: block;
+        font-size: 16px;
+        color: #333;
+        margin-bottom: 8px;
+    }
+
+    input[type="text"],
+    select {
+        width: 100%;
+        padding: 12px;
+        font-size: 16px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        outline: none;
+        margin-bottom: 15px; /* Add margin to create gap between input boxes */
+    }
+
+    input[type="text"]:focus,
+    select:focus {
+        border-color: #2e86de;
+        box-shadow: 0 0 5px rgba(46, 134, 222, 0.5);
+    }
+
+    .submit-button {
+        display: block;
+        width: 100%;
+        padding: 15px;
+        background-color: #2e86de;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+    }
+
+    .submit-button:hover {
+        background-color: #1e5fbd;
+    }
+</style>
+{% endblock %}
